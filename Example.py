@@ -20,13 +20,17 @@ def annotate_text():
                     for ent in doc.ents]
 
         # Parse entities and create a structured response
-        response = {'from': None, 'to': None}
+        response = {'from': None, 'to': None, 'mode': None,'time':None }
         for entity in entities:
             label = entity['label']
             if label == 'FROM':
                 response['from'] = text[entity['start']:entity['end']]
             elif label == 'TO':
                 response['to'] = text[entity['start']:entity['end']]
+            elif label == 'MODE':
+                response['mode'] = text[entity['start']:entity['end']]
+            elif label == 'TIME':
+                response['time'] = text[entity['start']:entity['end']]
 
         return jsonify(response)
 
